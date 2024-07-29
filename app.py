@@ -21,7 +21,7 @@ migrate = Migrate(app, db)
 SECRET_KEY = "alksndlajsdlasdiaisdi9093-49-0934lk234l2j34lkj"
 
 class User(db.Model):
-    id = db.Column(db.String, primary_key=True, default=str(uuid.uuid4()))
+    id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
     username = db.Column(db.String(255), unique=True, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
