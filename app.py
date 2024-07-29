@@ -14,7 +14,7 @@ import datetime
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://wrDB_owner:qEG4P1mKAVZl@ep-falling-tree-a5x4yzg3.us-east-2.aws.neon.tech/wrDB?sslmode=require"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://username:password@localhost:5432/testcaseDb"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 SECRET_KEY = "alksndlajsdlasdiaisdi9093-49-0934lk234l2j34lkj"
