@@ -150,10 +150,32 @@ def get_retreat(id):
 @app.route('/book', methods=['POST'])
 def book_retreat():
     data = request.get_json()
-    booking = Booking(**data)
-    db.session.add(booking)
-    db.session.commit()
-    return jsonify({'message': 'Booking successful'}), 201
+    try:
+        required_fields = ['user_id', 'user_name', 'user_email', 'user_phone', 'retreat_id', 'retreat_title', 'retreat_location', 'retreat_price', 'retreat_duration', 'payment_details', 'booking_date']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'message': f'Missing field: {field}'}), 400
+
+        booking = Booking(
+            user_id=data['user_id'],
+            user_name=data['user_name'],
+            user_email=data['user_email'],
+            user_phone=data['user_phone'],
+            retreat_id=data['retreat_id'],
+            retreat_title=data['retreat_title'],
+            retreat_location=data['retreat_location'],
+            retreat_price=data['retreat_price'],
+            retreat_duration=data['retreat_duration'],
+            payment_details=data['payment_details'],
+            booking_date=datetime.strptime(data['booking_date'], '%Y-%m-%d')  # Ensure date is parsed correctly
+        )
+        db.session.add(booking)
+        db.session.commit()
+        return jsonify({'message': 'Booking successful'}), 201
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return jsonify({'message': 'Internal Server Error'}), 500
+
 
 @app.route('/bookings', methods=['GET'])
 def get_user_bookings():
