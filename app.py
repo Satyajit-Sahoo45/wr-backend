@@ -10,6 +10,7 @@ import json
 import requests
 import jwt
 import datetime
+from dateutil import parser
 
 
 app = Flask(__name__)
@@ -67,7 +68,7 @@ class Retreat(db.Model):
         }
 
 class Booking(db.Model):
-    id = db.Column(db.String, primary_key=True, default=str(uuid.uuid4()))
+    id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id = db.Column(db.String)
     user_name = db.Column(db.String(255))
     user_email = db.Column(db.String(255))
@@ -167,7 +168,7 @@ def book_retreat():
             retreat_price=data['retreat_price'],
             retreat_duration=data['retreat_duration'],
             payment_details=data['payment_details'],
-            booking_date=datetime.strptime(data['booking_date'], '%Y-%m-%d')  # Ensure date is parsed correctly
+            booking_date=parser.parse(data['booking_date']).date()
         )
         db.session.add(booking)
         db.session.commit()
