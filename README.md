@@ -22,7 +22,7 @@ On macOS/Linux:
 
 ### `pip install -r requirements.txt`
 
-## Add Database Url in app.py:
+## Add Database Url and Secret Key in .env file:
 
 The DB_URL should be in this format:
 
