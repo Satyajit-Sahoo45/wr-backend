@@ -15,10 +15,10 @@ from dateutil import parser
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get("DB_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://wrDB_owner:qEG4P1mKAVZl@ep-falling-tree-a5x4yzg3.us-east-2.aws.neon.tech/wrDB"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-SECRET_KEY = environ.get("DB_URL")
+SECRET_KEY = "askjdhasdjlas0990834amsda"
 
 class User(db.Model):
     id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
