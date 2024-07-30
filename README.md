@@ -27,6 +27,7 @@ On macOS/Linux:
 The DB_URL should be in this format:
 
 ### `postgresql://username:password@localhost:5432/testcaseDb`
+### SECRET_KEY = `askjdhasdjlas0990834amsda`
 
 ## Initialize the Database:
 
